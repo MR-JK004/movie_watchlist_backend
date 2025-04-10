@@ -1,4 +1,4 @@
-import userModel from '../model/userModel.js'
+import userModel from '../models/userModel.js'
 import { validatePassword } from '../common/validation.js';
 import Function from '../common/Function.js'
 import auth from '../common/Function.js'
@@ -59,7 +59,8 @@ const authenticateUser = async (req, res) => {
 
                     res.status(200).send({
                         message: "Login Successful",
-                        token
+                        token,
+                        payload
                     });
             } else {
                 res.status(400).send({
@@ -72,6 +73,7 @@ const authenticateUser = async (req, res) => {
             });
         }
     } catch (error) {
+        console.log(error.message)
         res.status(500).send({
             message: error.message || "Internal Server Error",
             error
